@@ -1,24 +1,15 @@
-var neonjs = require('@cityofzion/neon-js')
+/* Node.js modules */
+var bodyParser = require('body-parser')
+var app = require('express')();
 
+app.use( bodyParser.json() );                       // to support JSON-encoded bodies
+app.use( bodyParser.urlencoded({extended: true}) ); // to support URL-encoded bodies
 
-var Neon = neonjs.default;
+require("./routes/endpoints")(app);
 
-const address = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y";
+const port = 8000;
 
-const config = {
-    name: 'PrivateNet',
-    extra: {
-      neoscan: 'http://localhost:4000/api/main_net'
-    }
-  }
- 
-const privateNet = new neonjs.rpc.Network(config);
-Neon.add.network(privateNet);
-
-let ns = new neonjs.api.neoscan.instance("PrivateNet");
-ns
-    .getBalance(address)
-    .then(res => {
-        console.log(res)
-    })
-    .catch( (ex) => { console.log(ex) });
+/* INITIALIZATION OF HTTP SERVER */
+app.listen(port, () => {
+    console.log("Listening on port: " + port + "...");
+});
