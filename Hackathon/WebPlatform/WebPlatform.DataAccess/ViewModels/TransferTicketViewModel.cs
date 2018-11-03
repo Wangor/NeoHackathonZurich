@@ -4,9 +4,7 @@ using System.Text;
 
 namespace WebPlatform.DataAccess.ViewModels
 {
-    public class TicketViewModel
+    public class TransferTicketViewModel
     {
-        public string TicketId { get; set; }
-        public bool Sold { get; set; }
     }
 }
