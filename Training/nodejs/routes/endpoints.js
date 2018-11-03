@@ -15,15 +15,17 @@ module.exports = function(app) {
                 return;
             }  
 
-            let result;
+            let result = {
+                exist: false,
+                address: ""
+            };
+
             let ticketId = req.params.ticketId;    
             let call = await neoJs.validateTicket(ticketId); 
             
             if (call.result.stack.length > 0 && call.result.stack[0].value) {
-                result = true;
-            }
-            else {
-                result = false;
+                result.exist = true;
+                result.address = call.result.stack[0].value;
             }
 
             res.json(result);
