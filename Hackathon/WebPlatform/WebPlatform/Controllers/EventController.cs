@@ -41,7 +41,11 @@ namespace WebPlatform.Controllers
 
         public async Task<IActionResult> Details(Guid eventId)
         {
-            return View(_eventService.GetEventById(eventId));
+            var eventVm = _eventService.GetEventById(eventId);
+            var eventCategories = _eventService.GetCategoriesForEvent(eventId);
+            var vm = new EventDetailsViewModel {EventDetails = eventVm, TicketCategories = eventCategories};
+            
+            return View(vm);
         }
     }
 }

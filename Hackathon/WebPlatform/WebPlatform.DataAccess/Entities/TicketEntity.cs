@@ -6,7 +6,7 @@ namespace WebPlatform.DataAccess
     {
         public string TicketId { get; set; }
 
-        public Guid EventId { get; set; }
+        public Guid TicketCategoryId { get; set; }
 
         public string OwnerId { get; set; }
     }

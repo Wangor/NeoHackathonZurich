@@ -23,8 +23,31 @@ namespace WebPlatform.Controllers
 
         public IActionResult Index(Guid eventId)
         {
-            var ticketsForEvent = _ticketService.GetTicketsForEvent(eventId);
-            return View(ticketsForEvent);
+            return View();
+        }
+
+        public async Task<IActionResult> CreateTicketCategory(Guid eventId)
+        {
+            return View(new NewTicketCategoryViewModel{EventId = eventId});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTicketCategory(NewTicketCategoryViewModel vm)
+        {
+            _ticketService.AddTicketCategory(vm);
+            return RedirectToAction("Details", "Event", new {eventId = vm.EventId});
+        }
+
+        public async Task<IActionResult> ShowTicketsForEvent(Guid categoryId)
+        {
+            var vm =_ticketService.GetTicketsForTicketCategory(categoryId);
+            return View(vm);
+        }
+
+        public async Task<IActionResult> TransferTicket(string ticketId)
+        {
+            var vm = new TranferTicketViewModel();
+            return View()
         }
     }
 }

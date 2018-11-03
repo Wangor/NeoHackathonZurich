@@ -1,7 +1,16 @@
-﻿@model WebPlatform.DataAccess.ViewModels.EventViewModel
-<h2>@Model.EventName</h2>
+﻿@model WebPlatform.DataAccess.ViewModels.EventDetailsViewModel
+<h2>@Model.EventDetails.EventName</h2>
 
-<p>@Model.Description</p>
+<p>@Model.EventDetails.Description</p>
 
-<a asp-controller="Tickets" asp-action="Index">Create new Tickettype</a>
-
+<a asp-controller="Tickets" asp-action="CreateTicketCategory" asp-route-eventId="@Model.EventDetails.EventId">Create new Tickettype</a>
+<h3>Tickets</h3>
+@foreach (var tc in Model.TicketCategories)
+{
+<div class="row">
+    <div class="col-md-3">@tc.Name</div>
+    <div class="col-md-3">@tc.NumberOfTickets</div>
+    <div class="col-md-3">@tc.Price</div>
+    <div class="col-md-3"><a asp-controller="Tickets" asp-action="ShowTicketsForEvent" asp-route-categoryId="@tc.TicketCategoryId">Show Tickets</a></div>
+</div>
+}

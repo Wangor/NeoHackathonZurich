@@ -1,28 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using Dapper;
 
 namespace WebPlatform.DataAccess.Repositories
 {
     public class TicketRepository
     {
+        private readonly IDbConnection _connection;
         private IList<TicketEntity> _tickets;
 
-        public TicketRepository()
+        public TicketRepository(IDbConnection connection)
         {
-            _tickets = new List<TicketEntity>
-            {
-                new TicketEntity {OwnerId = "123", TicketId = "ABC"},
-                new TicketEntity {OwnerId = "123", TicketId = "CDF"},
-                new TicketEntity {OwnerId = "123", TicketId = "XYZ"},
-                new TicketEntity {OwnerId = "456", TicketId = "ZZZ"},
-                new TicketEntity {OwnerId = "456", TicketId = "WER"}
-            };
-
+            _connection = connection;
         }
 
-        public IEnumerable<TicketEntity> All()
+        public IEnumerable<TicketEntity> GetTicketsByCategory(Guid categoryId)
         {
-            return _tickets;
+            return _connection.Query<TicketEntity>("SELECT * FROM Tickets WHERE TicketCategoryId=@CategoryId",
+                new {CategoryId = categoryId});
         }
 
         public IEnumerable<TicketEntity> GetByOwner(string ownerId)
@@ -30,9 +27,18 @@ namespace WebPlatform.DataAccess.Repositories
             return _tickets.Where(_ => _.OwnerId == ownerId);
         }
 
-        public void Add(TicketEntity ticket)
+        public void Add(TicketEntity entity)
         {
-            _tickets.Add(ticket);
+            var sql = @"INSERT INTO [dbo].[Tickets]
+                               ([TicketId]
+                               ,[TicketCategoryId]
+                               ,[OwnerId])
+                         VALUES
+                               (@TicketId
+                               ,@TicketCategoryId
+                               ,@OwnerId)";
+
+            _connection.Execute(sql, entity);
         }
 
         public void Delete(string ticketId)

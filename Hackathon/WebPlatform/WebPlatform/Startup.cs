@@ -50,6 +50,10 @@ namespace WebPlatform
             services.AddTransient<EventService>();
             services.AddTransient<EventRepository>();
             services.AddTransient<TicketRepository>();
+            services.AddTransient<TicketCategoryRepository>();
+            services.AddTransient<ContractService>();
+            services.AddTransient<UserRepository>();
+            services.AddTransient<UserService>();
             services.AddTransient<IDbConnection>(sp => new SqlConnection(Configuration.GetConnectionString("DefaultConnection")));
         }
 
