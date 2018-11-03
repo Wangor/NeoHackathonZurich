@@ -6,19 +6,29 @@ const matthiasAddress = "ALfsjbJLkQXSPEnEXEqJUnfXqGbCko3tpx";
 
 module.exports = function(app) {
        
-    app.get('/getBalance/:address', async function (req, res) {    
+    app.get('/verify/:ticketId', async function (req, res) {    
         
         try {      
 
-            if (!req.params.address) {
-                res.status(400).send({error: "The address value is missing"});    
+            if (!req.params.ticketId) {
+                res.status(400).send({error: "The ticket id value is missing"});    
                 return;
             }  
 
-            let address = req.params.address;    
-            let result = await neoJs.getBalance(address);  
+            let result = {
+                exist: false,
+                address: ""
+            };
+
+            let ticketId = req.params.ticketId;    
+            let call = await neoJs.validateTicket(ticketId); 
             
-            res.send(result);
+            if (call.result.stack.length > 0 && call.result.stack[0].value) {
+                result.exist = true;
+                result.address = call.result.stack[0].value;
+            }
+
+            res.json(result);
         }
         catch(ex) {
             res.status(500).send({error: ex.message});    
