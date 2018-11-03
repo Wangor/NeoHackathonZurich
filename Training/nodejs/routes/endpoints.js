@@ -1,11 +1,8 @@
 
 const neoJs = require("../neo-js.js");
 
-const jeroAddress = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y";
-const matthiasAddress = "ALfsjbJLkQXSPEnEXEqJUnfXqGbCko3tpx";
-
 module.exports = function(app) {
-       
+
     app.get('/verify/:ticketId', async function (req, res) {    
         
         try {      
