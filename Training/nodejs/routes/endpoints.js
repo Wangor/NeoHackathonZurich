@@ -26,7 +26,7 @@ module.exports = function(app) {
                 result = false;
             }
 
-            res.send(result);
+            res.json(result);
         }
         catch(ex) {
             res.status(500).send({error: ex.message});    
