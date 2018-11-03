@@ -1,0 +1,38 @@
+﻿@model WebPlatform.DataAccess.ViewModels.NewEventViewModel
+<h2>My Events</h2>
+
+<form asp-controller="Event" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="EventDateTime" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="EventDateTime" type="date" class="form-control" />
+            <span asp-validation-for="EventDateTime" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="EventName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="EventName" class="form-control" />
+            <span asp-validation-for="EventName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="SmartContractId" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="SmartContractId" class="form-control" />
+            <span asp-validation-for="SmartContractId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</form>

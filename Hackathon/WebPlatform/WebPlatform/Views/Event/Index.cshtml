@@ -1,0 +1,13 @@
+﻿@model IEnumerable<WebPlatform.DataAccess.ViewModels.EventViewModel>
+<h2>My Events</h2>
+
+<a asp-controller="Event" asp-action="Create">Create a new Event</a>
+
+@foreach (var e in Model)
+{
+    <div class="row">
+        <div class="col-md-3">@e.EventDateTime</div>
+        <div class="col-md-3">@e.EventName</div>
+        <div class="col-md-3"><a asp-controller="Event" asp-action="Details" asp-route-eventId="@e.EventId">Details</a></div>
+    </div>
+}
