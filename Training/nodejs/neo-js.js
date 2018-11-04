@@ -6,12 +6,14 @@ let self = {};
 
 const Neon = neonjs.default;
 
-const grpcUrl = "http://10.21.221.46:30333/";
+//const grpcUrl = "http://10.21.221.37:30333/";
+const grpcUrl = "http://localhost:30333/";
 
 const address = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y";
 const publicKey = "031a6c6fbbdf02ca351745fa86b9ba5a9452d785ac4f7fc2b7548ca2a46c4fcf4a";
 const contractHash = "a4e6af094a380a2d0b78e8454e00e8fb8d17f0ed";
 
+/*
 const localConfig = {
     name: 'PrivateNet',
     extra: {
@@ -21,7 +23,11 @@ const localConfig = {
  
 const privateNet = new neonjs.rpc.Network(localConfig);
 Neon.add.network(privateNet);
-  
+ 
+const privateNet = new neonjs.rpc.Network(localConfig);
+Neon.add.network(privateNet);
+*/  
+
 self.validateTicket = async function(ticketId) {
 
     const sb = Neon.create.scriptBuilder();
