@@ -19,10 +19,17 @@ module.exports = function(app) {
 
             let ticketId = req.params.ticketId;    
             let call = await neoJs.validateTicket(ticketId); 
-            
-            if (call.result.stack.length > 0 && call.result.stack[0].value) {
+
+            if (call.result.stack.length > 0) {
                 result.exist = true;
-                result.address = call.result.stack[0].value;
+
+                const neonjs  = require('@cityofzion/neon-js');            
+                const Neon = neonjs.default;
+    
+                let myresult = call.result.stack[0].value[0].value; 
+                myresult = Neon.u.hexstring2str(myresult);
+
+                result.address = myresult;
             }
 
             res.json(result);
