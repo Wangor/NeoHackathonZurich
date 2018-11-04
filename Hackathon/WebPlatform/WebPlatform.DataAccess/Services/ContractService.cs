@@ -22,5 +22,15 @@ namespace WebPlatform.DataAccess.Services
             var api = NeoRPC.ForPrivateNet();
             var result = api.CallContract(myKeys, scriptHash, "register", new object[] { ticketId, ownerAddress });
         }
+
+        public void TransferService(string ticketId, string callerPrivateKey, string receiverAddress)
+        {
+            var privKey = callerPrivateKey.HexToBytes();  // can be any valid private key
+            var myKeys = new KeyPair(privKey);
+            var scriptHash = UInt160.Parse(ContractScriptHash); // the scriptHash of the smart contract you want to use	
+            // for now, contracts must be in the format Main(string operation, object[] args)
+            var api = NeoRPC.ForPrivateNet();
+            var result = api.CallContract(myKeys, scriptHash, "transfer", new object[] { ticketId, receiverAddress });
+        }
     }
 }

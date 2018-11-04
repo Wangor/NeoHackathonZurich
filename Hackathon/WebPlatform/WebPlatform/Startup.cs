@@ -54,6 +54,7 @@ namespace WebPlatform
             services.AddTransient<ContractService>();
             services.AddTransient<UserRepository>();
             services.AddTransient<UserService>();
+            services.AddTransient<TransferService>();
             services.AddTransient<IDbConnection>(sp => new SqlConnection(Configuration.GetConnectionString("DefaultConnection")));
         }
 

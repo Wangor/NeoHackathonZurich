@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +14,13 @@ namespace WebPlatform.Controllers
     public class TicketsController : Controller
     {
         private readonly TicketService _ticketService;
+        private readonly TransferService _transferService;
         private readonly IConfiguration _configuration;
 
-        public TicketsController(TicketService ticketService, IConfiguration configuration)
+        public TicketsController(TicketService ticketService, TransferService transferService, IConfiguration configuration)
         {
             _ticketService = ticketService;
+            _transferService = transferService;
             _configuration = configuration;
         }
 
@@ -46,8 +49,16 @@ namespace WebPlatform.Controllers
 
         public async Task<IActionResult> TransferTicket(string ticketId)
         {
-            var vm = new TranferTicketViewModel();
-            return View()
+            var vm = new TransferTicketViewModel {TicketId = ticketId};
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TransferTicket(TransferTicketViewModel vm)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _transferService.Transfer(vm.TicketId, Guid.Parse(userId), vm.ReceiverEMail);
+            return RedirectToAction("Index");
         }
     }
 }

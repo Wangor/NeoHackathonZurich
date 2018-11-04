@@ -46,6 +46,17 @@ namespace WebPlatform.DataAccess.Repositories
             _tickets.Remove(_tickets.FirstOrDefault(_ => _.TicketId == ticketId));
         }
 
-        
+
+        public TicketEntity GetTicketById(string ticketId)
+        {
+            return _connection.QueryFirstOrDefault<TicketEntity>("SELECT * From Tickets WHERE TicketId=@TicketId",
+                new {TicketId = ticketId});
+        }
+
+        public void UpdateTicketOwner(string ticketId, string newOwnerAddress)
+        {
+            _connection.Execute("UPDATE Tickets SET OwnerId=@NewOwnerAddress WHERE TicketId=@TicketId",
+                new {NewOwnerAddress = newOwnerAddress, TicketId = ticketId});
+        }
     }
 }

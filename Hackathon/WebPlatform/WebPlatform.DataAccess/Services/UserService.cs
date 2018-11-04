@@ -25,5 +25,12 @@ namespace WebPlatform.DataAccess.Services
             var user = _userRepository.GetUserById(userId);
             return user != null ? user.UserPrivateKey : string.Empty;
         }
+
+        public string GetUserPublicAddressByEMail(string receiverEMail)
+        {
+            var user = _userRepository.GetUserByEMail(receiverEMail);
+
+            return user != null ? user.UserNeoAddress : string.Empty;
+        }
     }
 }

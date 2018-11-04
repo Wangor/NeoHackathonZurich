@@ -20,6 +20,13 @@ namespace WebPlatform.DataAccess.Repositories
         {
             return _connection.QueryFirstOrDefault<UserEntity>("SELECT * FROM Users WHERE UserId=@UserId",
                 new {UserId = userId});
-        } 
+        }
+
+        public UserEntity GetUserByEMail(string receiverEMail)
+        {
+            return _connection.QueryFirstOrDefault<UserEntity>(
+                "SELECT * FROM AspNetUsers LEFT JOIN Users on Id=UserId WHERE Email LIKE @EMail",
+                new {EMail = receiverEMail});
+        }
     }
 }

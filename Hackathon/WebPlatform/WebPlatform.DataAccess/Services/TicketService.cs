@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Text;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 using WebPlatform.DataAccess.Entities;
 using WebPlatform.DataAccess.Repositories;
 using WebPlatform.DataAccess.ViewModels;
@@ -37,13 +33,17 @@ namespace WebPlatform.DataAccess.Services
             _connection = connection;
         }
 
+        internal void TransferTicket(string ticketId, string receiverAddress)
+        {
+            _ticketRepository.UpdateTicketOwner(ticketId, receiverAddress);
+        }
+
         public IEnumerable<TicketViewModel> GetTicketsForEvent(Guid eventId)
         {
             var result = new List<TicketViewModel>();
 
             _connection.Query<TicketViewModel>("SELECT * FROM ");
-
-                return result;
+             return result;
         }
 
         public IEnumerable<TicketViewModel> GetTicketsForTicketCategory(Guid categoryId)

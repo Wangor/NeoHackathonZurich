@@ -1,0 +1,46 @@
+﻿@model IdManagementPortal.ViewModels.RegisterPersonViewModel
+<h2>Register a person</h2>
+<div>
+    <form asp-controller="Registration" asp-action="Register" method="post" enctype="multipart/form-data" style="background-color: white">
+        <div class="form-group">
+            <label asp-for="PassportNumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PassportNumber" class="form-control" />
+                <span asp-validation-for="PassportNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FullName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Citizen" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Citizen" class="form-control" />
+                <span asp-validation-for="Citizen" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Photo</label>
+            <div class="col-md-10">
+                <input asp-for="Photo" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>

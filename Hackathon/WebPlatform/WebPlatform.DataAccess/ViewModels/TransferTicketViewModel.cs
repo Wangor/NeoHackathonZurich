@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebPlatform.DataAccess.ViewModels
+﻿namespace WebPlatform.DataAccess.ViewModels
 {
     public class TransferTicketViewModel
     {
+        public string TicketId { get; set; }
+
+        public string ReceiverEMail { get; set; }
     }
 }

@@ -24,6 +24,9 @@
     <Content Update="Views\Event\Details.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Tickets\TransferTicket.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Tickets\ShowTicketsForEvent.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
