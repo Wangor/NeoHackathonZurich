@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      VERIFICATION ID-BLOCK
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <p>PASSPORT ID: {{(profileData | async)?.cedula}}</p>
+
+
+  <button ion-button (click)="takephoto()">Take Photo ! </button>  
+  <button ion-button full color="light" *ngIf="buttonClicked" (click)="openfirst()">VERIFY</button>
+
+  <p style="font-weight: bold; font-size: 25px; color: black;" text-center>{{(profileData | async)?.respuesta}}</p>
+  <p style="font-weight: bold; font-size: 20px; color: black;" text-center>Similitud: {{(profileData | async)?.porcentaje}}</p>
+
+  <button ion-button full color="light" *ngIf="buttonClicked2" (click)="next()">New Verification</button>
+  <button ion-button full color="light" *ngIf="buttonClicked3" (click)="register()">Register User</button>
+
+
+
+
+</ion-content>
